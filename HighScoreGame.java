@@ -26,10 +26,10 @@ public class HighScoreGame {
         // dealing player 2 - 2 cards
         c = deck.dealCard();
         System.out.println(player2.getName() + " receives a " + c);
-        player1.addCard(c);
+        player2.addCard(c);
         c = deck.dealCard();
         System.out.println(player2.getName() + " receives a " + c);
-        player1.addCard(c);
+        player2.addCard(c);
 
         // print out player scores
         System.out.println(player1);
