@@ -45,6 +45,8 @@ public class DeckOfCards {
             Card c = this.cards[i];
             this.cards[i] = this.cards[spot];
             this.cards[spot] = c;
+
+            
         }
     }
 }

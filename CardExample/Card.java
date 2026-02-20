@@ -1,3 +1,9 @@
+/**
+ * Represents a single playing card
+ * Contains the suit, rank, colour, and faceUp values
+ * @author Mr. Lamont
+ * @version 1.0
+ */
 public class Card {
     // instance variables
     private int rank;
@@ -5,7 +11,11 @@ public class Card {
     private String colour;
     private boolean faceUp;
 
-    // special method - constructor
+    /**
+     * Creates a single card of the given suit and rank, face up
+     * @param suit The suit of the card ("Clubs, Diamonds, Hearts, Spades")
+     * @param rank The rank of the card 1 - Ace, 2-10, 11 - Jack, 12 - Queen, 13 - King
+     */
     public Card(String suit, int rank){
         // use this.____ to talk about class variables
         this.faceUp = true;
@@ -20,11 +30,18 @@ public class Card {
     }
 
 
-    // Accessor methods / getters
+    /**
+     * Returns the suit of the given card
+     * @return String with the suit
+     */
     public String getSuit(){
         return this.suit;
     }
 
+    /**
+     * Returns the rank of the card
+     * @return String with the rank of the card
+     */
     public String getRank()
     {
         String rankString = "";
@@ -43,11 +60,18 @@ public class Card {
         return rankString;
     }
 
+    /**
+     * Returns the rank of the card in integer form
+     * @return int representing the rank 1-ace, 11-jack, 12-queen, 13-king
+     */
     public int getRankValue(){
         return this.rank;
     }
 
-    // special method - determines how to print this to the console
+    /**
+     * The text version of a card
+     * @return The full text description of the card
+     */
     public String toString(){
         return this.getRank() + " of " + this.suit;
     }
