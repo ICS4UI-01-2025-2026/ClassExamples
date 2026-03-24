@@ -68,48 +68,70 @@ public class Recursion
         }
     }
 
-    public static boolean solveMaze(char[][] maze, int endX, int endY,int x, int y){
+    public static boolean solveMaze(char[][] maze, int endRow, int endCol,int row, int col){
         // out of bounds
-        if(x >= maze.length || y >= maze[0].length || x < 0 || y < 0){
+        if(row >= maze.length || col >= maze[0].length || row < 0 || col < 0){
             return false;
         // hit a wall
-        }else if (maze[x][y] == 'W'){
+        }else if (maze[row][col] == 'W'){
             return false;
         // already travelled here
-        }else if(maze[x][y] == 'X'){
+        }else if(maze[row][col] == 'X'){
             return false;
         // found the solution
-        }else if(x == endX && y == endY){
+        }else if(row == endRow && col == endCol){
             printMaze(maze);
             return true;
         }
         // mark movement
-        maze[x][y] = 'X';
+        maze[row][col] = 'X';
         // try all directions around us
-        boolean right = solveMaze(maze, endX, endY, x+1, y);
-        boolean down = solveMaze(maze, endX, endY, x, y+1);
-        boolean left = solveMaze(maze, endX, endY, x-1, y);
-        boolean up = solveMaze(maze, endX, endY, x, y-1);
+        boolean right = solveMaze(maze, endRow, endCol, row, col+1);
+        boolean down = solveMaze(maze, endRow, endCol, row+1, col);
+        boolean left = solveMaze(maze, endRow, endCol, row, col-1);
+        boolean up = solveMaze(maze, endRow, endCol, row-1, col);
         // if a solution was found, we are done
         if(down || up || right || left){
             return true;
         }
         // if not, undo move and backtrack
-        maze[x][y] = ' ';
+        maze[row][col] = ' ';
         // no solution found
         return false;
     }
 
     private static void printMaze(char[][] maze){
-        for(int row = 0; row < maze[0].length; row++){
-            for(int col = 0; col < maze.length; col++){
-                System.out.print(maze[row][col]);
+        for(int row = 0; row < maze.length; row++){
+            for(int col = 0; col < maze[row].length; col++){
+                System.out.print(maze[row][col] + " ");
             }
             System.out.println();
         }
     }
 
     public static void main(String[] args) {
+        // print all 5 digit binary numbers
+        printBinary(5, "");
+        // print all permutations of ABC
         permute("ABC", "");
+
+        // maze with openings (1,0) and (1,7): (row, col)
+        // ' ' means empty space, 'W' means wall
+        char[][] maze = {{'W','W','W','W','W','W','W','W'},
+                         {' ',' ',' ',' ','W','W',' ',' '},
+                         {'W',' ','W',' ','W','W',' ','W'},
+                         {'W',' ',' ',' ','W','W',' ','W'},
+                         {'W',' ','W','W',' ',' ',' ','W'},
+                         {'W',' ',' ','W',' ','W','W','W'},
+                         {'W','W',' ',' ',' ',' ',' ','W'},
+                         {'W',' ',' ','W','W','W',' ','W'},
+                         {'W','W','W','W','W','W','W','W'}
+                        };
+
+        if(solveMaze(maze, 1, 0, 1, 7)){
+            System.out.println("Found a solution");
+        }else{
+            System.out.println("No solution found");
+        }
     }
 }
